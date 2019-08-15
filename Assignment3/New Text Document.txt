@@ -1,0 +1,17 @@
+select count(*)	 from employees;
+300024
+
+SELECT count(*) FROM departments;
+9
+
+SELECT count(*) FROM dept_emp;
+331603
+
+SELECT count(*) FROM dept_manager;
+24
+
+SELECT count(*) FROM salaries;
+2844047
+
+SELECT count(*) FROM titles;
+443308

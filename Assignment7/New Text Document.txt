@@ -1,0 +1,17 @@
+use employees;
+
+SELECT 
+    COUNT(*)
+FROM
+    employees;
+
+SELECT 
+    *
+FROM
+    employees
+        LEFT JOIN
+    titles ON employees.emp_no = titles.emp_no
+        AND titles.to_date = '9999-01-01'
+WHERE
+    titles.emp_no IS NULL;
+

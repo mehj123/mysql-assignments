@@ -1,0 +1,20 @@
+
+Assignment - Create Person Table
+• Create a table called “persons”
+• Create two columns in the table: First Name, and Last Name
+• Use first_name and last_name
+• Each should be the data type VARCHAR with 255 bytes
+• Insert Your Name into the table
+• Select your name from the table
+
+
+Query
+
+CREATE TABLE persons(
+	first_name VARCHAR(255),
+	last_name VARCHAR(255)
+);
+
+INSERT INTO persons VALUES ("Fathima", "Noora");
+
+SELECT CONCAT(first_name,' ', last_name) as 'My Name' FROM persons;
