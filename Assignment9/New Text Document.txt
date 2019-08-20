@@ -1,0 +1,9 @@
+use employees;
+insert into employees select max(employees.emp_no)+1, '1983-05-05','Noora','Begum','F','2019-05-05' from employees;
+
+insert into titles values ((select employees.emp_no from employees where first_name='Noora'),'Senior Engineer','2019-05-05', '9999-01-01');
+
+insert into dept_emp values ((select employees.emp_no from employees where first_name='Noora'), (select dept_no from departments where dept_name='Development'),'2019-05-05', '9999-01-01');
+
+insert into salaries values ((select employees.emp_no from employees where first_name='Noora'),100000000,'2019-05-05', '9999-01-01');
+

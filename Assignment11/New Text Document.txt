@@ -1,0 +1,8 @@
+use employees;
+
+
+update salaries set to_date='2019-08-15' where emp_no=500000;
+
+
+
+insert into salaries values (500000,100000000,'2019-08-15', '9999-01-01');
