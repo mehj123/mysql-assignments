@@ -172,7 +172,7 @@ db.student.find({classes:{$in:["history"]}}).pretty()
 }
 
 -- Command to sort and limit
-db.student.find({classes:{$in:["history"]}}).sort({units:1}).pretty()
+db.student.find({classes:{$in:["history"]}}).sort({units:1}).pretty() -- units:-1 for descending
 {
         "_id" : ObjectId("5d6526d9519e0709f8aaba3f"),
         "name" : "Rachel",
