@@ -1,0 +1,5 @@
+use employees;
+
+
+
+insert into departments (dept_no, dept_name) values ('D010','My New Department');

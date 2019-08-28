@@ -1,0 +1,5 @@
+use employees;
+
+select * from employees where first_name='Mehj' and last_name='Begum';
+
+update employees set first_name='Sam', last_name='Axe' where emp_no=500000;

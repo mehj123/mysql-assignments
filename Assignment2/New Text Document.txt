@@ -1,0 +1,23 @@
+CREATE TABLE customer(
+	ID INTEGER,
+	first_name VARCHAR(255),
+	last_name VARCHAR(255),
+	address VARCHAR(500),
+	city VARCHAR(20),
+	state VARCHAR(20),
+	zip_code VARCHAR(20)	
+);
+
+CREATE TABLE drink_order(
+	id INTEGER,
+	customer_id INTEGER,
+	drink_description VARCHAR(255)
+);
+
+INSERT INTO customer values(1234,'Michael','Weston','123 Brickel', 'Miami', 'US','33155');
+INSERT INTO customer values(1235,'Fionna','Gleanne','123 Brickel', 'Miami','US', '33155');
+INSERT INTO customer values(1236,'Sam','Axe','123 Brickel', 'Miami','US',  '33155');
+
+INSERT INTO drink_order values(122249, 1234, 'Scotch');
+INSERT INTO drink_order values(122250, 1235, 'Pina Colada');
+INSERT INTO drink_order values(122251, 1236, 'Budwiser');
