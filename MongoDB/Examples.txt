@@ -1,0 +1,197 @@
+--Command to create new collection, or switch to a different collection
+use examples
+
+-- Command to create collections
+db.createCollection("cars") -- cars is the name of collection
+{ "ok" : 1 }
+
+-- Command to show collections
+show collections
+Output
+cars
+
+-- Command to add a new document to the cars collection (semi colon is optional,inverted commas can be single or double, can use quotes for keys 
+db.car.insert({
+	name:'honda',
+	make:'accord',
+	year:'2010'
+});
+Output
+WriteResult({ "nInserted" : 1 })
+
+-- Command to view the document from the collection
+db.car.find().pretty()
+Output
+{
+        "_id" : ObjectId("5d63d8a14c989d052542ba3d"),
+        "name" : "honda",
+        "make" : "accord",
+        "year" : "2010"
+}
+
+
+-- Command to update the keys (change honda to ford)
+db.car.update({
+	name:'honda'
+	},
+	{ $set:{
+		name: 'ford'
+		}
+	}
+)
+Output
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+-- Command to add some key to document
+db.car.update({
+	name:'ford'
+	},
+	{ $set:{
+		transmission: 'automatic'
+		}
+	},{$upsert:true}
+)
+Output
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+
+-- Command to remove a document
+db.car.remove({}) -- will remove all documents
+db.car.remove({name:"ford"})
+Output
+WriteResult({ "nRemoved" : 1 })
+
+
+-- Command to insert in a loop
+for(var i=0;i<10;i++){db.car.insert({"x":i})}
+
+
+-- Commands for querying
+mongo
+use example
+db.createCollection("student")
+db.student.insert({
+    name: 'Joe',
+    undergrad: true,
+    units: 9,
+    classes: ['geography', 'math', 'journalism']
+})
+
+db.student.insert({
+    name: 'Jane',
+    undergrad: false,
+    units: 12,
+    classes: ['geography', 'science', 'journalism', 'history']
+})
+
+db.student.insert({
+    name: 'Kevin',
+    undergrad: true,
+    units: 3,
+    classes: ['geography']
+})
+
+db.student.insert({
+    name: 'Rachel',
+    undergrad: false,
+    units: 6,
+    classes: ['geography', 'history']
+})
+
+-- Query on one field
+db.student.find({"name":"Kevin"}).pretty()
+Output
+{
+        "_id" : ObjectId("5d6526d8519e0709f8aaba3e"),
+        "name" : "Kevin",
+        "undergrad" : true,
+        "units" : 3,
+        "classes" : [
+                "geography"
+        ]
+}
+-- Query to find documents with units > 3 (gt ,lt gte,lte can be used)
+db.student.find({units:{$gt: 3}}).pretty()
+Output
+{
+        "_id" : ObjectId("5d6526d8519e0709f8aaba3c"),
+        "name" : "Joe",
+        "undergrad" : true,
+        "units" : 9,
+        "classes" : [
+                "geography",
+                "math",
+                "journalism"
+        ]
+}
+{
+        "_id" : ObjectId("5d6526d8519e0709f8aaba3d"),
+        "name" : "Jane",
+        "undergrad" : false,
+        "units" : 12,
+        "classes" : [
+                "geography",
+                "science",
+                "journalism",
+                "history"
+        ]
+}
+{
+        "_id" : ObjectId("5d6526d9519e0709f8aaba3f"),
+        "name" : "Rachel",
+        "undergrad" : false,
+        "units" : 6,
+        "classes" : [
+                "geography",
+                "history"
+        ]
+}
+-- Using in query (when in is used inputs should be specified as an array)
+db.student.find({classes:{$in:["history"]}}).pretty()
+{
+        "_id" : ObjectId("5d6526d8519e0709f8aaba3d"),
+        "name" : "Jane",
+        "undergrad" : false,
+        "units" : 12,
+        "classes" : [
+                "geography",
+                "science",
+                "journalism",
+                "history"
+        ]
+}
+{
+        "_id" : ObjectId("5d6526d9519e0709f8aaba3f"),
+        "name" : "Rachel",
+        "undergrad" : false,
+        "units" : 6,
+        "classes" : [
+                "geography",
+                "history"
+        ]
+}
+
+-- Command to sort and limit
+db.student.find({classes:{$in:["history"]}}).sort({units:1}).pretty()
+{
+        "_id" : ObjectId("5d6526d9519e0709f8aaba3f"),
+        "name" : "Rachel",
+        "undergrad" : false,
+        "units" : 6,
+        "classes" : [
+                "geography",
+                "history"
+        ]
+}
+{
+        "_id" : ObjectId("5d6526d8519e0709f8aaba3d"),
+        "name" : "Jane",
+        "undergrad" : false,
+        "units" : 12,
+        "classes" : [
+                "geography",
+                "science",
+                "journalism",
+                "history"
+        ]
+}
